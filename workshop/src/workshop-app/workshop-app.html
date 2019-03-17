@@ -1,13 +1,35 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid-column.html">
+
+<script src="/constructors/mealObject.js"></script>
+<script src="/constructors/ingredientObject.js"></script>
+
+<script>
+  var ingredient1 = new Ingredient(1, "Norivellen", 10, "Other", "7", 4);
+  var ingredient2 = new Ingredient(2, "Sushirijst", 800, "Rijst", "18", 300);
+  var ingredient3 = new Ingredient(3, "Avocado", 8, "Vrucht", "3", 2);
+
+  var allIngredients = [ingredient1, ingredient2, ingredient3];
+
+  var meal1 = new Meal("1", "Urumaki", "Omschrijving", "Zomer", "12.50");
+  var meal2 = new Meal("2", "Temaki", "Omschrijving", "Herfst", "22,30");
+
+  var allMeals = [meal1, meal2];
+
+  localStorage.setItem('meal1', JSON.stringify(meal1));
+  localStorage.setItem('ingredients', JSON.stringify(allIngredients));
+</script>
 
 <dom-module id="workshop-app">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <h2>Hello [[prop1]]!</h2>
+
+    <vaadin-grid id="gridThing">
+      <vaadin-grid-column path="id" header="ID"></vaadin-grid-column>
+      <vaadin-grid-column path="name" header="Naam"></vaadin-grid-column>
+    </vaadin-grid>
+
   </template>
 
   <script>
@@ -19,14 +41,15 @@
       static get is() { return 'workshop-app'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'workshop-app'
-          }
         };
       }
+      constructor() {
+        super();
+      }
+      ready() {
+        super.ready();
+      }
     }
-
     window.customElements.define(WorkshopApp.is, WorkshopApp);
   </script>
 </dom-module>

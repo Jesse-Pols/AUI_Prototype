@@ -7,4 +7,6 @@ function Ingredient(id, name, amount, type, expirationDate, minimalAmount){
   this.expirationDate = expirationDate;
   this.minimalAmount = minimalAmount;
 
+  return this;
+
 }
