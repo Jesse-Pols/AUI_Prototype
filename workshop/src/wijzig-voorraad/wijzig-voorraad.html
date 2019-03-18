@@ -1,0 +1,142 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href= "../../bower_components/paper-input-2.x/paper-input.html">
+<link rel="import" href= "../../bower_components/paper-input-2.x/paper-input.html">
+
+<dom-module id="wijzig-voorraad">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            td, th {
+                padding: 8px;
+                box-sizing: border-box;
+                white-space: nowrap;
+            }
+            td:nth-of-type(1),
+            th:nth-of-type(1) {
+                background-color: rgba(0, 67, 255, 0.08);
+            }
+            tr.iron-selected td {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+            tr:hover td {
+                background-color: rgba(0, 0, 0, 0.08);
+            }
+            tr td.iron-selected:not(:nth-of-type(1)) {
+                background-color: rgba(0, 67, 255, 0.08);
+            }
+
+            #menuButton {
+                position: fixed;
+                display: block;
+                background-color: #70a6ff;
+                color: #fff;
+                padding: 25px;
+                margin-top: 25px;
+                width: 700px;
+                text-align: center;
+            }
+
+            paper-button.btnTerug {
+                position: fixed;
+                margin-left:  650px;
+                margin-top: 500px;
+                background-color: #70a6ff;
+                color: #fff;
+            }
+
+            #menu {
+                display: block;
+                position: fixed;
+                top: 40%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                padding: 30px 50px;
+                border: 1px solid #d3e4ff;
+
+                height: 600px;
+                width: 700px;
+            }
+
+            #ingredientenLijst{
+                position: fixed;
+                border: 1px solid #d3e4ff;
+                width: 700px;
+            }
+        </style>
+
+        <div id="menu">
+            <h1>Wijzig voorraad</h1>
+            <div id="ingredientenLijst">
+                <table is="s-table-lite" fixed-column>
+                    <thead>
+                        <tr>
+                            <th>Nummer</th>
+                            <th>Ingredient</th>
+                            <th>Houdbaarheidsdatum</th>
+                            <th>Minimumvoorraad</th>
+                            <th>Voorraad</th>
+                            <th>Eenheid</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody is="s-tbody">
+                        <template is="dom-repeat" items="[[ingredienten]]" as="ingredient">
+                            <tr is="s-tr" multi>
+                            <td>{{ingredient.id}}</td>
+                            <td>{{ingredient.naam}}</td>
+                            <td>{{ingredient.houdbaarheidsdatum}}</td>
+                            <td>{{ingredient.minimumVoorraad}}</td>
+                            <td><paper-input id="voorraadInput" type="Number" value="8"></paper-input></td>
+                            <td>{{ingredient.eenheid}}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        
+            <div>
+                <paper-button on-click="back" class="btnTerug">Terug</paper-button>
+            </div>
+
+        </div>
+    </template>
+
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         */
+        class WijzigVoorraad extends Polymer.Element {
+        static get is() { return 'wijzig-voorraad'; }
+        static get properties() {
+            return {
+                ingredienten: {
+                    type: Array,
+                    value: [
+                    {id: 1, naam: "ingredient1", minimumVoorraad: 3, voorraad: 10, eenheid: "L", houdbaarheidsdatum: "22-05-2019"},
+                    {id: 2, naam: "ingredient2", minimumVoorraad: 3, voorraad: 10, eenheid: "L", houdbaarheidsdatum: "22-05-2019"},
+                    {id: 3, naam: "ingredient3", minimumVoorraad: 3, voorraad: 10, eenheid: "L", houdbaarheidsdatum: "22-05-2019"},
+                    {id: 4, naam: "ingredient4", minimumVoorraad: 3, voorraad: 10, eenheid: "L", houdbaarheidsdatum: "22-05-2019"},
+                    {id: 5, naam: "ingredient5", minimumVoorraad: 3, voorraad: 10, eenheid: "L", houdbaarheidsdatum: "22-05-2019"},
+                    {id: 6, naam: "ingredient6", minimumVoorraad: 3, voorraad: 10, eenheid: "L", houdbaarheidsdatum: "22-05-2019"}
+                    ]
+                }
+            };
+        }
+        back() {
+            if (localStorage.actor == "eigenaar"){
+                location.href = "eigenaar_home.html";
+            }
+            else{
+                location.href = "kok_home.html";
+            }
+        }
+        }
+        window.customElements.define(WijzigVoorraad.is, WijzigVoorraad);
+    </script>
+</dom-module>

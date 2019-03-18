@@ -1,0 +1,75 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="kok-home">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      paper-button {
+        display: block;
+        background-color: #70a6ff;
+        color: #fff;
+        padding: 25px;
+        margin-top: 25px;
+        width: 500px;
+        text-align: center;
+      }
+
+      #menu {
+        position: relative;
+        margin-left: 550px;
+        margin-top: 100px;
+      }
+
+      paper-button.btnTerug {
+        width: 150px;
+        border-top-left-radius: 100px;
+        border-bottom-left-radius: 100px;
+        border-top-right-radius: 100px;
+        border-bottom-right-radius: 100px;
+        padding: 15px;
+        margin-top: 300px;
+        margin-left: 550px;
+      }
+
+    </style>
+
+    <div id="menu">
+        <a href="bereid_gerecht.html">
+            <paper-button raised>Bereid gerecht</paper-button>
+        </a>
+        <a href="wijzig_voorraad.html">
+            <paper-button raised>Wijzig voorraad</paper-button>
+        </a>
+    </div>
+
+    <div id="terug">
+        <a href="index.html"><paper-button class="btnTerug">Terug</paper-button></a>
+    </div>
+    
+
+  </template>
+  <script>
+    localStorage.actor = "kok";
+    /**
+     * @customElement
+     * @polymer
+     */
+    class KokHome extends Polymer.Element {
+      static get is() { return 'kok-home'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'kok-home'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(KokHome.is, KokHome);
+  </script>
+</dom-module>

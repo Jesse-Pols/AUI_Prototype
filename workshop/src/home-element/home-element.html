@@ -1,0 +1,79 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="home-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      paper-input{
+          border: solid 1px black;
+          margin-bottom: 10px;
+      }
+      
+      paper-button {
+        display: block;
+        background-color: #70a6ff;
+        color: #fff;
+        padding: 25px;
+        margin-top: 25px;
+        width: 500px;
+        text-align: center;
+      }
+
+      paper-button.btnTerug {
+        width: 150px;
+        border-top-left-radius: 100px;
+        border-bottom-left-radius: 100px;
+        border-top-right-radius: 100px;
+        border-bottom-right-radius: 100px;
+        padding: 15px;
+        margin-top: 300px;
+        margin-left: 550px;
+      }
+
+      #menu {
+        position: relative;
+        margin-left: 550px;
+        margin-top: 100px;
+      }
+
+    </style>
+
+    <div id="menu">
+        <a href="eigenaar_home.html">
+            <paper-button raised>Eigenaar</paper-button>
+        </a>
+        <a href="kok_home.html">
+            <paper-button raised>Kok</paper-button>
+        </a>
+        <a href="bestel_gerecht.html">
+            <paper-button raised>Klant</paper-button>
+        </a>
+    </div>
+    
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class HomeElement extends Polymer.Element {
+      static get is() { return 'home-element'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'home-element'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(HomeElement.is, HomeElement);
+  </script>
+</dom-module>
