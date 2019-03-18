@@ -1,0 +1,117 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../../bower_components/s-table/s-table-lite.html">
+<link rel="import" href="../../bower_components/s-table/s-tbody.html">
+<link rel="import" href="../../bower_components/s-table/s-tr.html">
+
+<dom-module id="bestel-voorraad">
+  <template>
+    <style>
+      :host{
+        font-family: "Roboto";
+      }
+      td, th {
+        padding: 8px;
+        box-sizing: border-box;
+        white-space: nowrap;
+      }
+      td:nth-of-type(1),
+      th:nth-of-type(1) {
+        background-color: rgba(0, 67, 255, 0.08);
+      }
+      tr.iron-selected td {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      tr:hover td {
+        background-color: rgba(0, 0, 0, 0.08);
+      }
+      tr td.iron-selected:not(:nth-of-type(1)) {
+        background-color: rgba(0, 67, 255, 0.08);
+      }
+
+      paper-button {
+        background-color: #70a6ff;
+        color: #fff;
+      }
+
+      .weergave {
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        padding: 40px 160px;
+        border: 1px solid #d3e4ff;
+      }
+
+      .buttons {
+        margin-top: 20px;
+      }
+
+      .btnAnnuleer {
+        float: left;
+      }
+
+      .btnBestel {
+        float: right;
+      }
+    </style>
+
+    <div class="weergave">
+      <h2>Voorraad</h2>
+      <table is="s-table-lite" fixed-column>
+        <thead>
+          <tr>
+            <th>Gerecht</th>
+            <th>Hoeveelheid</th>
+            <th>Minimum voorraad</th>
+            <th>Aantal</th>
+          </tr>
+        </thead>
+        <tbody is="s-tbody">
+          <template is="dom-repeat" items="[[voorraad]]" as="ingredient">
+            <tr is="s-tr" multi>
+              <td>{{ingredient.gerecht}}</td>
+              <td>{{ingredient.hoeveelheid}}</td>
+              <td>{{ingredient.minimumVoorraad}}</td>
+              <td><paper-input type="number" value="{{ingredient.aantal}}"></paper-input></td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+
+      <div class="buttons">
+        <a href="../../index.html"><paper-button class="btnAnnuleer">annuleer</paper-button></a>
+        <a href="#"><paper-button class="btnBestel">bestel</paper-button></a>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class BestelVoorraad extends Polymer.Element {
+      static get is() { return "bestel-voorraad"; }
+      static get properties() {
+        return {
+          voorraad: {
+            type: Array,
+            value: [
+            { gerecht: "gerecht1", hoeveelheid: "200", minimumVoorraad: "250", aantal: "0" },
+            { gerecht: "gerecht2", hoeveelheid: "150", minimumVoorraad: "250", aantal: "0" },
+            { gerecht: "gerecht3", hoeveelheid: "120", minimumVoorraad: "250", aantal: "0" },
+            { gerecht: "gerecht4", hoeveelheid: "320", minimumVoorraad: "250", aantal: "0" },
+            { gerecht: "gerecht5", hoeveelheid: "60", minimumVoorraad: "250", aantal: "0" }
+            ]
+          }
+        };
+      }
+    }
+
+    window.customElements.define(BestelVoorraad.is, BestelVoorraad);
+  </script>
+</dom-module>
