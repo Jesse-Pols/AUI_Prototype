@@ -108,8 +108,8 @@
                 <tbody is="s-tbody">
                     <template is="dom-repeat" items="[[ingredienten]]" as="ingredient">
                         <tr is="s-tr" multi>
-                        <td>{{ingredienten.id}}</td>
-                        <td>{{ingredienten.naam}}</td>
+                        <td>{{ingredient.id}}</td>
+                        <td>{{ingredient.naam}}</td>
                         <td><paper-button id="verwijderButton" on-click="verwijder">X</paper-button></td>
                         </tr>
                     </template>

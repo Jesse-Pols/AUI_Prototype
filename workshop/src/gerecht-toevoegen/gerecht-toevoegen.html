@@ -1,0 +1,133 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+
+<link rel="import" href="../../bower_components/s-table/s-table-lite.html">
+<link rel="import" href="../../bower_components/s-table/s-tbody.html">
+<link rel="import" href="../../bower_components/s-table/s-tr.html">
+
+<dom-module id="gerecht-toevoegen">
+  <template>
+    <style>
+      :host{
+        font-family: "Roboto";
+      }
+      td, th {
+        padding: 8px;
+        box-sizing: border-box;
+        white-space: nowrap;
+      }
+      td:nth-of-type(1),
+      th:nth-of-type(1) {
+        background-color: rgba(0, 67, 255, 0.08);
+      }
+      tr.iron-selected td {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      tr:hover td {
+        background-color: rgba(0, 0, 0, 0.08);
+      }
+      tr td.iron-selected:not(:nth-of-type(1)) {
+        background-color: rgba(0, 67, 255, 0.08);
+      }
+
+      paper-button {
+        background-color: #70a6ff;
+        color: #fff;
+      }
+
+      .weergave {
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        padding: 40px 160px;
+        border: 1px solid #d3e4ff;
+      }
+
+      .buttons {
+        margin-top: 20px;
+      }
+
+      .btnAnnuleer {
+        float: left;
+      }
+
+      .btnBestel {
+        float: right;
+      }
+
+      .btnVerwijder {
+          background-color: rgba(255, 0, 0, 0.21);
+          color: #000;
+          border-radius: 25%;
+          font-size: 12px;
+          border: 1px solid black;
+      }
+
+    </style>
+
+    <div class="weergave">
+      <h2>Gerechten Toevoegen</h2>
+      <table is="s-table-lite" fixed-column>
+        <thead>
+          <tr>
+            <th>Gerecht</th>
+            <th>Omschrijving</th>
+            <th>Prijs</th>
+          </tr>
+        </thead>
+        <tbody is="s-tbody">
+          <template is="dom-repeat" items="[[gerechten]]" as="gerecht">
+            <tr is="s-tr" multi>
+              <td>[[gerecht.naam]]</td>
+              <td>[[gerecht.omschrijving]]</td>
+              <td>[[gerecht.prijs]]</td>
+              <td><paper-checkbox>Bestelbaar</paper-checkbox></td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+
+      <div class="adder"><br>
+        <input type="text" placeholder="Naam"><br>
+        <input type="text" placeholder="Omschrijving"><br>
+        <input type="text" placeholder="Prijs"><br>
+      </div>
+
+      <div class="buttons">
+        <a href="../../index.html"><paper-button class="btnAnnuleer">annuleer</paper-button></a>
+        <a href="#"><paper-button class="btnBestel">toevoegen</paper-button></a>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class GerechtToevoegen extends Polymer.Element {
+      static get is() { return "gerecht-toevoegen"; }
+      static get properties() {
+        return {
+          gerechten: {
+            type: Array,
+            value: [
+            { naam: "gerecht1", omschrijving: "Lorem Ipsum", prijs: "12,50" },
+            { naam: "gerecht2", omschrijving: "Lorem Ipsum", prijs: "10,50" },
+            { naam: "gerecht3", omschrijving: "Lorem Ipsum", prijs: "8,30" },
+            { naam: "gerecht4", omschrijving: "Lorem Ipsum", prijs: "15,00" },
+            { naam: "gerecht5", omschrijving: "Lorem Ipsum", prijs: "21,20" }
+            ]
+          }
+        };
+      }
+    }
+
+    window.customElements.define(GerechtToevoegen.is, GerechtToevoegen);
+  </script>
+</dom-module>

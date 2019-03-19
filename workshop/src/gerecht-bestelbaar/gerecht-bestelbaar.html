@@ -7,7 +7,7 @@
 <link rel="import" href="../../bower_components/s-table/s-tbody.html">
 <link rel="import" href="../../bower_components/s-table/s-tr.html">
 
-<dom-module id="toevoegen-gerecht">
+<dom-module id="gerecht-bestelbaar">
   <template>
     <style>
       :host{
@@ -70,7 +70,7 @@
     </style>
 
     <div class="weergave">
-      <h2>Alle Gerechten</h2>
+      <h2>Gerechten Toevoegen</h2>
       <table is="s-table-lite" fixed-column>
         <thead>
           <tr>
@@ -85,22 +85,15 @@
               <td>[[gerecht.naam]]</td>
               <td>[[gerecht.omschrijving]]</td>
               <td>[[gerecht.prijs]]</td>
-              <td><paper-button class="btnVerwijder" onclick="myFunction()">X</paper-button></td>
               <td><paper-checkbox>Bestelbaar</paper-checkbox></td>
             </tr>
           </template>
         </tbody>
       </table>
 
-      <div class="adder"><br>
-        <input type="text" placeholder="Naam"><br>
-        <input type="text" placeholder="Omschrijving"><br>
-        <input type="text" placeholder="Prijs"><br>
-      </div>
-
       <div class="buttons">
         <a href="../../index.html"><paper-button class="btnAnnuleer">annuleer</paper-button></a>
-        <a href="#"><paper-button class="btnBestel">toevoegen</paper-button></a>
+        <a href="#"><paper-button class="btnBestel">submit</paper-button></a>
       </div>
     </div>
 
@@ -111,8 +104,8 @@
      * @customElement
      * @polymer
      */
-    class ToevoegenGerecht extends Polymer.Element {
-      static get is() { return "toevoegen-gerecht"; }
+    class GerechtBestelbaar extends Polymer.Element {
+      static get is() { return "gerecht-bestelbaar"; }
       static get properties() {
         return {
           gerechten: {
@@ -129,11 +122,6 @@
       }
     }
 
-    function myFunction(){
-      // Item toevoegen aan array
-      console.log("{{gerechten}}");
-    }
-
-    window.customElements.define(ToevoegenGerecht.is, ToevoegenGerecht);
+    window.customElements.define(GerechtBestelbaar.is, GerechtBestelbaar);
   </script>
 </dom-module>
