@@ -81,24 +81,24 @@
                             <th>Minimumvoorraad</th>
                             <th>Voorraad</th>
                             <th>Eenheid</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody is="s-tbody">
                         <template is="dom-repeat" items="[[ingredienten]]" as="ingredient">
                             <tr is="s-tr" multi>
-                            <td>{{ingredient.id}}</td>
-                            <td>{{ingredient.naam}}</td>
-                            <td>{{ingredient.houdbaarheidsdatum}}</td>
-                            <td>{{ingredient.minimumVoorraad}}</td>
+                            <td>{{ingredienten.id}}</td>
+                            <td>{{ingredienten.naam}}</td>
+                            <td>{{ingredienten.houdbaarheidsdatum}}</td>
+                            <td>{{ingredienten.minimumVoorraad}}</td>
                             <td><paper-input id="voorraadInput" type="Number" value="8"></paper-input></td>
-                            <td>{{ingredient.eenheid}}</td>
+                            <td>{{ingredienten.eenheid}}</td>
                             </tr>
                         </template>
                     </tbody>
                 </table>
             </div>
-        
+
             <div>
                 <paper-button on-click="back" class="btnTerug">Terug</paper-button>
             </div>

@@ -92,8 +92,8 @@
 
     </style>
 
-    
-    
+
+
     <div id="menu">
         <h1>Verwijder ingredient</h1>
         <div id="ingredientenLijst">
@@ -108,15 +108,15 @@
                 <tbody is="s-tbody">
                     <template is="dom-repeat" items="[[ingredienten]]" as="ingredient">
                         <tr is="s-tr" multi>
-                        <td>{{ingredient.id}}</td>
-                        <td>{{ingredient.naam}}</td>
+                        <td>{{ingredienten.id}}</td>
+                        <td>{{ingredienten.naam}}</td>
                         <td><paper-button id="verwijderButton" on-click="verwijder">X</paper-button></td>
                         </tr>
                     </template>
                 </tbody>
             </table>
         </div>
-    
+
         <div>
             <a href="eigenaar_home.html"><paper-button class="btnTerug">Terug</paper-button></a>
         </div>
@@ -129,7 +129,7 @@
         <br>
         <paper-button on-click="verwijder"></paper-button>
     </div>
-    
+
   </template>
 
   <script>
@@ -168,7 +168,7 @@
         }
     }
 
-    
+
     window.customElements.define(VerwijderIngredient.is, VerwijderIngredient);
   </script>
 </dom-module>
