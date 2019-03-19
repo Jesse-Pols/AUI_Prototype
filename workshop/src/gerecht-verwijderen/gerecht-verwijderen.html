@@ -67,6 +67,29 @@
           border: 1px solid black;
       }
 
+      #verwijderDialog{
+           top: 40%;
+          left: 65%;
+
+          height: 115px;
+          width: 200px;
+          position: absolute;
+
+          background: #adcbfd8f;
+          border: 1px solid #70a6ff;
+      }
+
+      #verwijderButton{
+          font-family: Arial, Helvetica, sans-serif;
+          color: rgb(255, 0, 0);
+          text-align: center;
+          width: 100px;
+      }
+
+      .closeDialogClass{
+          font-size: 14px;
+      }
+
     </style>
 
     <div class="weergave">
@@ -85,7 +108,7 @@
               <td>[[gerecht.naam]]</td>
               <td>[[gerecht.omschrijving]]</td>
               <td>[[gerecht.prijs]]</td>
-              <td><paper-button class="btnVerwijder" onclick="myFunction()">X</paper-button></td>
+              <td><paper-button class="btnVerwijder" id="verwijderButton" on-click="verwijder">X</paper-button></td>
             </tr>
           </template>
         </tbody>
@@ -94,6 +117,15 @@
       <div class="buttons">
         <a href="eigenaar_home.html"><paper-button class="btnAnnuleer">Terug</paper-button></a>
       </div>
+    </div>
+
+    <div id="verwijderDialog" hidden="{{hideDialog}}">
+        <br>
+        <paper-button class="closeDialogClass" on-click="closeDialog">Verwijderen</paper-button>
+        <br>
+        <br>
+        <br>
+        <paper-button class="closeDialogClass" on-click="closeDialog">Annuleren</paper-button>
     </div>
 
   </template>
@@ -116,8 +148,18 @@
             { naam: "gerecht4", omschrijving: "Lorem Ipsum", prijs: "15,00" },
             { naam: "gerecht5", omschrijving: "Lorem Ipsum", prijs: "21,20" }
             ]
+          },
+          hideDialog:{
+              type: Boolean,
+              value: true
           }
         };
+      }
+      verwijder(id){
+          this.hideDialog = false;
+      }
+      closeDialog(){
+          this.hideDialog = true;
       }
     }
 
