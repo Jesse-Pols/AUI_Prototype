@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
@@ -6,8 +8,6 @@
 <link rel="import" href="../../bower_components/s-table/s-table-lite.html">
 <link rel="import" href="../../bower_components/s-table/s-tbody.html">
 <link rel="import" href="../../bower_components/s-table/s-tr.html">
-
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <dom-module id="gerecht-verwijderen">
   <template>
@@ -94,6 +94,9 @@
 
     </style>
 
+    <app-localstorage-document key="localGerechten" data="{{localGerechten}}">
+    <app-localstorage-document key="localIngredienten" data="{{localIngredienten}}">
+
     <div class="weergave">
       <h2>Gerechten Verwijderen</h2>
       <table is="s-table-lite" fixed-column>
@@ -105,7 +108,7 @@
           </tr>
         </thead>
         <tbody is="s-tbody">
-          <template is="dom-repeat" items="{{gerechten}}" as="gerecht">
+          <template is="dom-repeat" items="{{localGerechten}}" as="gerecht">
             <tr is="s-tr" multi>
               <td>{{gerecht.naam}}</td>
               <td>{{gerecht.omschrijving}}</td>
@@ -162,7 +165,7 @@
 
             // var item is the name of the item we want to remove from gerechten
             var item = id.path[i].cells[0].textContent;
-            var meals = this.gerechten;
+            var meals = JSON.parse(localStorage.getItem('localGerechten'));
 
             // Every meal is checked by name
             for (var j = 0; j < meals.length; j++){
@@ -170,7 +173,9 @@
 
                 // meal is spliced from array, and pushed to properties
                 meals.splice(j, 1);
-                this.setAttribute('gerechten', JSON.stringify(meals));
+                localStorage.setItem('localGerechten', JSON.stringify(meals));
+                location.reload();
+                //this.setAttribute('gerechten', JSON.stringify(meals));
 
               }
             }

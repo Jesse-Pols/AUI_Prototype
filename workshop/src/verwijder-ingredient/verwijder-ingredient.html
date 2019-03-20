@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+
 <link rel="import" href="../../bower_components/paper-input-2.x/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
@@ -99,7 +101,8 @@
 
     </style>
 
-
+    <app-localstorage-document key="localGerechten" data="{{localGerechten}}">
+    <app-localstorage-document key="localIngredienten" data="{{localIngredienten}}">
 
     <div id="menu">
         <h1>Verwijder ingredient</h1>
@@ -107,13 +110,13 @@
             <table is="s-table-lite" fixed-column>
                 <thead>
                     <tr>
+                        <th>Nummer</th>
                         <th>Ingredient</th>
-                        <th>nummer</th>
-                        <th>verwijder</th>
+                        <th>Verwijder</th>
                     </tr>
                 </thead>
                 <tbody is="s-tbody">
-                    <template is="dom-repeat" items="[[ingredienten]]" as="ingredient">
+                    <template is="dom-repeat" items="{{localIngredienten}}" as="ingredient">
                         <tr is="s-tr" multi>
                         <td>{{ingredient.id}}</td>
                         <td>{{ingredient.naam}}</td>
@@ -150,23 +153,41 @@
       static get is() { return 'verwijder-ingredient'; }
       static get properties() {
         return {
-          ingredienten: {
-            type: Array,
-            value: [
-            {id: 1, naam: "ingredient1"},
-            {id: 2, naam: "ingredient2"},
-            {id: 3, naam: "ingredient3"},
-            {id: 4, naam: "ingredient4"},
-            {id: 5, naam: "ingredient5"},
-            {id: 6, naam: "ingredient6"}
-            ]
-          },
           hideDialog:{
               type: Boolean,
               value: true
           }
         };
       }
+      verwijder(id){
+        console.log(id);
+
+        // check all items in path
+        for (var i = 0; i < id.path.length; i++){
+
+          // check if item is table row, containing all data we need
+          if (id.path[i] instanceof HTMLTableRowElement){
+
+            // var item is the name of the item we want to remove from ingredients
+            var item = id.path[i].cells[0].textContent;
+            var ingredients = JSON.parse(localStorage.getItem('localIngredienten'));
+
+            // Every ingredient is checked by name
+            for (var j = 0; j < ingredients.length; j++){
+              if (ingredients[j].id == item){
+
+                // ingredient is spliced from array, and pushed to properties
+                ingredients.splice(j, 1);
+                localStorage.setItem('localIngredienten', JSON.stringify(ingredients));
+                location.reload();
+                //this.setAttribute('ingredienten', JSON.stringify(ingredients));
+
+              }
+            }
+          }
+        }
+      }
+        /* These functions no longer work
         verwijder(id){
             console.log(id);
             console.log("kaas");
@@ -176,6 +197,7 @@
         closeDialog(){
             this.hideDialog = true;
         }
+        */
     }
 
 

@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
@@ -59,24 +61,27 @@
       }
     </style>
 
+    <app-localstorage-document key="localGerechten" data="{{localGerechten}}">
+    <app-localstorage-document key="localIngredienten" data="{{localIngredienten}}">
+
     <div class="weergave">
       <h2>Voorraad</h2>
       <table is="s-table-lite" fixed-column>
         <thead>
           <tr>
-            <th>Gerecht</th>
+            <th>Ingredient</th>
             <th>Hoeveelheid</th>
             <th>Minimum voorraad</th>
             <th>Aantal</th>
           </tr>
         </thead>
         <tbody is="s-tbody">
-          <template is="dom-repeat" items="[[voorraad]]" as="ingredient">
+          <template is="dom-repeat" items="{{localIngredienten}}" as="ingredient">
             <tr is="s-tr" multi>
-              <td>{{ingredient.gerecht}}</td>
+              <td>{{ingredient.naam}}</td>
               <td>{{ingredient.hoeveelheid}}</td>
               <td>{{ingredient.minimumVoorraad}}</td>
-              <td><paper-input type="number" value="{{ingredient.aantal}}"></paper-input></td>
+              <td><paper-input type="number" value=""></paper-input></td>
             </tr>
           </template>
         </tbody>

@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
@@ -69,6 +71,9 @@
 
     </style>
 
+    <app-localstorage-document key="localGerechten" data="{{localGerechten}}">
+    <app-localstorage-document key="localIngredienten" data="{{localIngredienten}}">
+
     <div class="weergave">
       <h2>Gerechten Toevoegen</h2>
       <table is="s-table-lite" fixed-column>
@@ -80,11 +85,11 @@
           </tr>
         </thead>
         <tbody is="s-tbody">
-          <template is="dom-repeat" items="[[gerechten]]" as="gerecht">
+          <template is="dom-repeat" items="{{localGerechten}}" as="gerecht">
             <tr is="s-tr" multi>
-              <td>[[gerecht.naam]]</td>
-              <td>[[gerecht.omschrijving]]</td>
-              <td>[[gerecht.prijs]]</td>
+              <td>{{gerecht.naam}}</td>
+              <td>{{gerecht.omschrijving}}</td>
+              <td>{{gerecht.prijs}}</td>
             </tr>
           </template>
         </tbody>

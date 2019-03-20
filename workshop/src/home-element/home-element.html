@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
 
 <dom-module id="home-element">
   <template>
@@ -43,6 +44,9 @@
 
     </style>
 
+    <app-localstorage-document key="localGerechten" data="{{localGerechten}}">
+    <app-localstorage-document key="localIngredienten" data="{{localIngredienten}}">
+
     <div id="menu">
         <a href="eigenaar_home.html">
             <paper-button raised>Eigenaar</paper-button>
@@ -70,6 +74,27 @@
           prop1: {
             type: String,
             value: 'home-element'
+          },
+          localGerechten: {
+            type: Array,
+            value: [
+            { naam: "gerecht1", omschrijving: "Lorem Ipsum", prijs: "12,50" },
+            { naam: "gerecht2", omschrijving: "Lorem Ipsum", prijs: "10,50" },
+            { naam: "gerecht3", omschrijving: "Lorem Ipsum", prijs: "8,30" },
+            { naam: "gerecht4", omschrijving: "Lorem Ipsum", prijs: "15,00" },
+            { naam: "gerecht5", omschrijving: "Lorem Ipsum", prijs: "21,20" }
+            ]
+          },
+          localIngredienten: {
+            type: Array,
+            value: [
+            {id: 1, naam: "ingredient1", hoeveelheid: "200", minimumVoorraad: "120" },
+            {id: 2, naam: "ingredient2", hoeveelheid: "150", minimumVoorraad: "140" },
+            {id: 3, naam: "ingredient3", hoeveelheid: "220", minimumVoorraad: "250" },
+            {id: 4, naam: "ingredient4", hoeveelheid: "13", minimumVoorraad: "20" },
+            {id: 5, naam: "ingredient5", hoeveelheid: "60", minimumVoorraad: "20" },
+            {id: 6, naam: "ingredient6", hoeveelheid: "120", minimumVoorraad: "100" }
+            ]
           }
         };
       }
