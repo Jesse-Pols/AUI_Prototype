@@ -7,6 +7,8 @@
 <link rel="import" href="../../bower_components/s-table/s-tbody.html">
 <link rel="import" href="../../bower_components/s-table/s-tr.html">
 
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
 <dom-module id="gerecht-verwijderen">
   <template>
     <style>
@@ -103,13 +105,14 @@
           </tr>
         </thead>
         <tbody is="s-tbody">
-          <template is="dom-repeat" items="[[gerechten]]" as="gerecht">
+          <template is="dom-repeat" items="{{gerechten}}" as="gerecht">
             <tr is="s-tr" multi>
-              <td>[[gerecht.naam]]</td>
-              <td>[[gerecht.omschrijving]]</td>
-              <td>[[gerecht.prijs]]</td>
-              <td><paper-button class="btnVerwijder" id="verwijderButton" on-click="verwijder">X</paper-button></td>
+              <td>{{gerecht.naam}}</td>
+              <td>{{gerecht.omschrijving}}</td>
+              <td>{{gerecht.prijs}}</td>
               <!-- $0 .parentElement.parentElement.firstElementChild.textContent -->
+              <!-- MouseEvent.path.td.childNodes.0.attributes.2: value.nodeValue -->
+              <td><paper-button class="btnVerwijder" id="verwijderButton" on-click="verwijder">X</paper-button></td>
             </tr>
           </template>
         </tbody>
@@ -120,18 +123,11 @@
       </div>
     </div>
 
-    <div id="verwijderDialog" hidden="{{hideDialog}}">
-        <br>
-        <paper-button class="closeDialogClass" on-click="closeDialog">Verwijderen</paper-button>
-        <br>
-        <br>
-        <br>
-        <paper-button class="closeDialogClass" on-click="closeDialog">Annuleren</paper-button>
-    </div>
-
   </template>
 
   <script>
+    var thing;
+    var ger;
     /**
      * @customElement
      * @polymer
@@ -157,10 +153,29 @@
         };
       }
       verwijder(id){
-          this.hideDialog = false;
-      }
-      closeDialog(){
-          this.hideDialog = true;
+
+        // check all items in path
+        for (var i = 0; i < id.path.length; i++){
+
+          // check if item is table row, containing all data we need
+          if (id.path[i] instanceof HTMLTableRowElement){
+
+            // var item is the name of the item we want to remove from gerechten
+            var item = id.path[i].cells[0].textContent;
+            var meals = this.gerechten;
+
+            // Every meal is checked by name
+            for (var j = 0; j < meals.length; j++){
+              if (meals[j].naam == item){
+
+                // meal is spliced from array, and pushed to properties
+                meals.splice(j, 1);
+                this.setAttribute('gerechten', JSON.stringify(meals));
+
+              }
+            }
+          }
+        }
       }
     }
 
