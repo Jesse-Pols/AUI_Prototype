@@ -75,7 +75,7 @@
     <app-localstorage-document key="localIngredienten" data="{{localIngredienten}}">
 
     <div class="weergave">
-      <h2>Gerechten Toevoegen</h2>
+      <h2>Gerechten Wijzigen</h2>
       <table is="s-table-lite" fixed-column>
         <thead>
           <tr>
@@ -90,7 +90,7 @@
               <td>{{gerecht.naam}}</td>
               <td>{{gerecht.omschrijving}}</td>
               <td>{{gerecht.prijs}}</td>
-              <td><paper-checkbox checked={{gerecht.bestelbaar}} on-change="checkboxChanged">Bestelbaar</paper-checkbox></td>
+              <td><paper-checkbox checked={{gerecht.bestelbaar}}>Bestelbaar</paper-checkbox></td>
             </tr>
           </template>
         </tbody>
@@ -98,7 +98,6 @@
 
       <div class="buttons">
         <a href="eigenaar_home.html"><paper-button class="btnAnnuleer">Terug</paper-button></a>
-        <a href="#"><paper-button class="btnBestel">submit</paper-button></a>
       </div>
     </div>
 
@@ -114,33 +113,6 @@
       static get properties() {
         return {
         };
-      }
-      checkboxChanged(id){
-
-        // check all items in path
-        for (var i = 0; i < id.path.length; i++){
-
-          // check if item is table row, containing all data we need
-          if (id.path[i] instanceof HTMLTableRowElement){
-
-            // var item is the name of the item we want to remove from gerechten
-            var item = id.path[i].cells[0].textContent;
-            var meals = JSON.parse(localStorage.getItem('localGerechten'));
-
-            // Every meal is checked by name
-            for (var j = 0; j < meals.length; j++){
-              if (meals[j].naam == item){
-
-                // meal is spliced from array, and pushed to properties
-                meals[j].bestelbaar = true;
-                localStorage.setItem('localGerechten', JSON.stringify(meals));
-                location.reload();
-                //this.setAttribute('gerechten', JSON.stringify(meals));
-
-              }
-            }
-          }
-        }
       }
     }
 

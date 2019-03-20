@@ -30,7 +30,7 @@
         margin-top: 100px;
       }
 
-      #gegevensInvoer{
+      .gegevensInvoer{
         position: fixed;
         top: 40%;
         left: 50%;
@@ -48,7 +48,7 @@
     <app-localstorage-document key="localGerechten" data="{{localGerechten}}">
     <app-localstorage-document key="localIngredienten" data="{{localIngredienten}}">
 
-    <div id="gegevensInvoer">
+    <div class="gegevensInvoer">
         <h1>Nieuwe Ingredient</h1>
 
         <paper-input id="naamInput" always-float-label label="Naam" type="String"></paper-input>
@@ -56,7 +56,7 @@
         <paper-input id="minVoorraadInput" always-float-label label="Minimum voorraad" type="Number"></paper-input>
         <paper-input id="houdbaarDatumInput" always-float-label label="Houdbaarheidsdatum" type="Date"></paper-input>
         <br>
-        <paper-button on-click="submitHandler" class="buttons">Opslaan</paper-button></a>
+        <paper-button on-click="add" class="buttons">Opslaan</paper-button></a>
         <a href="eigenaar_home.html"><paper-button>Terug</paper-button></a>
     </div>
 
@@ -67,6 +67,7 @@
   </template>
 
   <script>
+    var thing;
     /**
      * @customElement
      * @polymer
@@ -77,9 +78,26 @@
         return {
         };
       }
+      add(id){
+        thing = id;
+        var ingredients = JSON.parse(localStorage.getItem('localIngredienten'));
 
-      submitHandler(id){
-          console.log(id);
+        for (var i = 0; i < id.path.length; i++){
+
+          if (thing.path[i] instanceof HTMLDivElement){
+            if (thing.path[i].className == "gegevensInvoer"){
+
+              var naam = thing.path[i].childNodes[2].value;
+              var omschrijving = thing.path[i].childNodes[5].value;
+              var prijs = thing.path[i].childNodes[8].value;
+
+              ingredients.push({"naam":naam,"omschrijving":omschrijving,"prijs":prijs,"bestelbaar":false})
+              localStorage.setItem('localGerechten', JSON.stringify(ingredients));
+              location.reload();
+
+            }
+          }
+        }
       }
     }
 
