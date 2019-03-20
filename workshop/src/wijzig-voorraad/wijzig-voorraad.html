@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href= "../../bower_components/paper-input-2.x/paper-input.html">
 <link rel="import" href= "../../bower_components/paper-input-2.x/paper-input.html">
@@ -69,6 +71,9 @@
             }
         </style>
 
+        <app-localstorage-document key="localGerechten" data="{{localGerechten}}">
+        <app-localstorage-document key="localIngredienten" data="{{localIngredienten}}">
+
         <div id="menu">
             <h1>Wijzig voorraad</h1>
             <div id="ingredientenLijst">
@@ -81,18 +86,17 @@
                             <th>Minimumvoorraad</th>
                             <th>Voorraad</th>
                             <th>Eenheid</th>
-
                         </tr>
                     </thead>
                     <tbody is="s-tbody">
-                        <template is="dom-repeat" items="[[ingredienten]]" as="ingredient">
+                        <template is="dom-repeat" items="{{localIngredienten}}" as="ingredient">
                             <tr is="s-tr" multi>
-                            <td>[[ingredient.id]]</td>
-                            <td>[[ingredient.naam]]</td>
-                            <td>[[ingredient.houdbaarheidsdatum]]</td>
-                            <td>[[ingredient.minimumVoorraad]]</td>
-                            <td><paper-input id="voorraadInput" type="Number" value="8"></paper-input></td>
-                            <td>[[ingredient.eenheid]]</td>
+                            <td>{{ingredient.id}}</td>
+                            <td>{{ingredient.naam}}</td>
+                            <td>{{ingredient.houdbaarheidsdatum}}</td>
+                            <td>{{ingredient.minimumVoorraad}}</td>
+                            <td><paper-input id="voorraadInput" type="Number" value="{{ingredient.voorraad}}"></paper-input></td>
+                            <td>{{ingredient.eenheid}}</td>
                             </tr>
                         </template>
                     </tbody>
@@ -115,17 +119,6 @@
         static get is() { return 'wijzig-voorraad'; }
         static get properties() {
             return {
-                ingredienten: {
-                    type: Array,
-                    value: [
-                    {id: 1, naam: "ingredient1", minimumVoorraad: 3, voorraad: 10, eenheid: "L", houdbaarheidsdatum: "22-05-2019"},
-                    {id: 2, naam: "ingredient2", minimumVoorraad: 3, voorraad: 10, eenheid: "L", houdbaarheidsdatum: "22-05-2019"},
-                    {id: 3, naam: "ingredient3", minimumVoorraad: 3, voorraad: 10, eenheid: "L", houdbaarheidsdatum: "22-05-2019"},
-                    {id: 4, naam: "ingredient4", minimumVoorraad: 3, voorraad: 10, eenheid: "L", houdbaarheidsdatum: "22-05-2019"},
-                    {id: 5, naam: "ingredient5", minimumVoorraad: 3, voorraad: 10, eenheid: "L", houdbaarheidsdatum: "22-05-2019"},
-                    {id: 6, naam: "ingredient6", minimumVoorraad: 3, voorraad: 10, eenheid: "L", houdbaarheidsdatum: "22-05-2019"}
-                    ]
-                }
             };
         }
         back() {

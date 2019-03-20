@@ -42,6 +42,11 @@
         transform:translate(-50%, -50%);
       }
 
+      .remark {
+        color: #adadad;
+        font-size: 13px;
+      }
+
     </style>
 
     <app-localstorage-document key="localGerechten" data="{{localGerechten}}">
@@ -57,6 +62,7 @@
         <a href="bestel_gerecht.html">
             <paper-button raised>Klant</paper-button>
         </a>
+        <p class="remark"><i>Data in localStorage is gereset.</i></p>
     </div>
 
 
@@ -78,22 +84,22 @@
           localGerechten: {
             type: Array,
             value: [
-            { naam: "gerecht1", omschrijving: "Lorem Ipsum", prijs: "12,50" },
-            { naam: "gerecht2", omschrijving: "Lorem Ipsum", prijs: "10,50" },
-            { naam: "gerecht3", omschrijving: "Lorem Ipsum", prijs: "8,30" },
-            { naam: "gerecht4", omschrijving: "Lorem Ipsum", prijs: "15,00" },
-            { naam: "gerecht5", omschrijving: "Lorem Ipsum", prijs: "21,20" }
+            { naam: "gerecht1", omschrijving: "Lorem Ipsum", prijs: "12,50", bestelbaar: true },
+            { naam: "gerecht2", omschrijving: "Lorem Ipsum", prijs: "10,50", bestelbaar: true },
+            { naam: "gerecht3", omschrijving: "Lorem Ipsum", prijs: "8,30", bestelbaar: true },
+            { naam: "gerecht4", omschrijving: "Lorem Ipsum", prijs: "15,00", bestelbaar: false },
+            { naam: "gerecht5", omschrijving: "Lorem Ipsum", prijs: "21,20", bestelbaar: false }
             ]
           },
           localIngredienten: {
             type: Array,
             value: [
-            {id: 1, naam: "ingredient1", hoeveelheid: "200", minimumVoorraad: "120" },
-            {id: 2, naam: "ingredient2", hoeveelheid: "150", minimumVoorraad: "140" },
-            {id: 3, naam: "ingredient3", hoeveelheid: "220", minimumVoorraad: "250" },
-            {id: 4, naam: "ingredient4", hoeveelheid: "13", minimumVoorraad: "20" },
-            {id: 5, naam: "ingredient5", hoeveelheid: "60", minimumVoorraad: "20" },
-            {id: 6, naam: "ingredient6", hoeveelheid: "120", minimumVoorraad: "100" }
+            {id: 1, naam: "ingredient1", voorraad: "200", minimumVoorraad: "120", houdbaarheidsdatum: "22-05-2019", eenheid: "L" },
+            {id: 2, naam: "ingredient2", voorraad: "150", minimumVoorraad: "140", houdbaarheidsdatum: "22-05-2019", eenheid: "KG" },
+            {id: 3, naam: "ingredient3", voorraad: "220", minimumVoorraad: "250", houdbaarheidsdatum: "22-05-2019", eenheid: "L" },
+            {id: 4, naam: "ingredient4", voorraad: "13", minimumVoorraad: "20", houdbaarheidsdatum: "22-05-2019", eenheid: "L" },
+            {id: 5, naam: "ingredient5", voorraad: "60", minimumVoorraad: "20", houdbaarheidsdatum: "22-05-2019", eenheid: "KG" },
+            {id: 6, naam: "ingredient6", voorraad: "120", minimumVoorraad: "100", houdbaarheidsdatum: "22-05-2019", eenheid: "KG" }
             ]
           }
         };

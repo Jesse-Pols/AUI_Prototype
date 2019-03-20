@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
@@ -69,6 +71,9 @@
 
     </style>
 
+    <app-localstorage-document key="localGerechten" data="{{localGerechten}}">
+    <app-localstorage-document key="localIngredienten" data="{{localIngredienten}}">
+
     <div class="weergave">
       <h2>Gerechten Toevoegen</h2>
       <table is="s-table-lite" fixed-column>
@@ -80,12 +85,12 @@
           </tr>
         </thead>
         <tbody is="s-tbody">
-          <template is="dom-repeat" items="[[gerechten]]" as="gerecht">
+          <template is="dom-repeat" items="{{localGerechten}}" as="gerecht">
             <tr is="s-tr" multi>
-              <td>[[gerecht.naam]]</td>
-              <td>[[gerecht.omschrijving]]</td>
-              <td>[[gerecht.prijs]]</td>
-              <td><paper-checkbox>Bestelbaar</paper-checkbox></td>
+              <td>{{gerecht.naam}}</td>
+              <td>{{gerecht.omschrijving}}</td>
+              <td>{{gerecht.prijs}}</td>
+              <td><paper-checkbox checked={{gerecht.bestelbaar}} on-change="checkboxChanged">Bestelbaar</paper-checkbox></td>
             </tr>
           </template>
         </tbody>
@@ -108,17 +113,34 @@
       static get is() { return "gerecht-bestelbaar"; }
       static get properties() {
         return {
-          gerechten: {
-            type: Array,
-            value: [
-            { naam: "gerecht1", omschrijving: "Lorem Ipsum", prijs: "12,50" },
-            { naam: "gerecht2", omschrijving: "Lorem Ipsum", prijs: "10,50" },
-            { naam: "gerecht3", omschrijving: "Lorem Ipsum", prijs: "8,30" },
-            { naam: "gerecht4", omschrijving: "Lorem Ipsum", prijs: "15,00" },
-            { naam: "gerecht5", omschrijving: "Lorem Ipsum", prijs: "21,20" }
-            ]
-          }
         };
+      }
+      checkboxChanged(id){
+
+        // check all items in path
+        for (var i = 0; i < id.path.length; i++){
+
+          // check if item is table row, containing all data we need
+          if (id.path[i] instanceof HTMLTableRowElement){
+
+            // var item is the name of the item we want to remove from gerechten
+            var item = id.path[i].cells[0].textContent;
+            var meals = JSON.parse(localStorage.getItem('localGerechten'));
+
+            // Every meal is checked by name
+            for (var j = 0; j < meals.length; j++){
+              if (meals[j].naam == item){
+
+                // meal is spliced from array, and pushed to properties
+                meals[j].bestelbaar = true;
+                localStorage.setItem('localGerechten', JSON.stringify(meals));
+                location.reload();
+                //this.setAttribute('gerechten', JSON.stringify(meals));
+
+              }
+            }
+          }
+        }
       }
     }
 

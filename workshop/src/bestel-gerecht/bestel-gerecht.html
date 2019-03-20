@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
@@ -59,6 +61,9 @@
       }
     </style>
 
+    <app-localstorage-document key="localGerechten" data="{{localGerechten}}">
+    <app-localstorage-document key="localIngredienten" data="{{localIngredienten}}">
+
     <div class="weergave">
       <h2>Kies uw gerechten!</h2>
       <table is="s-table-lite" fixed-column>
@@ -70,11 +75,11 @@
           </tr>
         </thead>
         <tbody is="s-tbody">
-          <template is="dom-repeat" items="[[gerechten]]" as="gerecht">
+          <template is="dom-repeat" items="{{localGerechten}}" as="gerecht">
             <tr is="s-tr" multi>
               <td>{{gerecht.naam}}</td>
               <td>{{gerecht.omschrijving}}</td>
-              <td><paper-input type="number" value="{{gerecht.aantal}}"></paper-input></td>
+              <td><paper-input type="number" value=""></paper-input></td>
             </tr>
           </template>
         </tbody>
@@ -97,16 +102,6 @@
       static get is() { return "bestel-gerecht"; }
       static get properties() {
         return {
-          gerechten: {
-            type: Array,
-            value: [
-            { naam: "gerecht1", omschrijving: "Lorem Ipsum", aantal: "0" },
-            { naam: "gerecht2", omschrijving: "Lorem Ipsum", aantal: "0" },
-            { naam: "gerecht3", omschrijving: "Lorem Ipsum", aantal: "0" },
-            { naam: "gerecht4", omschrijving: "Lorem Ipsum", aantal: "0" },
-            { naam: "gerecht5", omschrijving: "Lorem Ipsum", aantal: "0" }
-            ]
-          }
         };
       }
     }

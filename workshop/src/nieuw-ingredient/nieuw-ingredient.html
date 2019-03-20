@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href= "../../bower_components/paper-input-2.x/paper-input.html">
 <link rel="import" href= "../../bower_components/iron-localstorage-2.x/iron-localstorage.html">
@@ -43,22 +45,25 @@
 
     </style>
 
+    <app-localstorage-document key="localGerechten" data="{{localGerechten}}">
+    <app-localstorage-document key="localIngredienten" data="{{localIngredienten}}">
+
     <div id="gegevensInvoer">
         <h1>Nieuwe Ingredient</h1>
 
-        <paper-input id="naamInput" always-float-label label="Naam" type="String" value="[[ingredient.naam]]"></paper-input>
-        <paper-input id="eenheidInput" always-float-label label="Eenheid" type="String" value="{{ingredient.eenheid}}"></paper-input>
-        <paper-input id="minVoorraadInput" always-float-label label="Minimum voorraad" type="Number" value="{{ingredient.minVoorraad}}"></paper-input>
-        <paper-input id="houdbaarDatumInput" always-float-label label="Houdbaarheidsdatum" type="Date"  value="{{ingredient.houdbaarheidsdatum}}"></paper-input>
+        <paper-input id="naamInput" always-float-label label="Naam" type="String"></paper-input>
+        <paper-input id="eenheidInput" always-float-label label="Eenheid" type="String"></paper-input>
+        <paper-input id="minVoorraadInput" always-float-label label="Minimum voorraad" type="Number"></paper-input>
+        <paper-input id="houdbaarDatumInput" always-float-label label="Houdbaarheidsdatum" type="Date"></paper-input>
         <br>
         <paper-button on-click="submitHandler" class="buttons">Opslaan</paper-button></a>
         <a href="eigenaar_home.html"><paper-button>Terug</paper-button></a>
     </div>
 
-    
 
 
-    
+
+
   </template>
 
   <script>
@@ -70,20 +75,11 @@
       static get is() { return 'nieuw-ingredient'; }
       static get properties() {
         return {
-          ingredient: {
-            type: Object,
-            value: {
-                naam: "kaas",
-                eenheid: "L",
-                minVoorraad: 0,
-                houdbaarheidsdatum: Date.now()
-            }
-          }
         };
       }
 
-      submitHandler(){
-          console.log(ingredient.naam);
+      submitHandler(id){
+          console.log(id);
       }
     }
 

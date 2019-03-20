@@ -70,7 +70,7 @@
         <thead>
           <tr>
             <th>Ingredient</th>
-            <th>Hoeveelheid</th>
+            <th>Voorraad</th>
             <th>Minimum voorraad</th>
             <th>Aantal</th>
           </tr>
@@ -79,9 +79,9 @@
           <template is="dom-repeat" items="{{localIngredienten}}" as="ingredient">
             <tr is="s-tr" multi>
               <td>{{ingredient.naam}}</td>
-              <td>{{ingredient.hoeveelheid}}</td>
+              <td>{{ingredient.voorraad}}</td>
               <td>{{ingredient.minimumVoorraad}}</td>
-              <td><paper-input type="number" value=""></paper-input></td>
+              <td><paper-input type="Number"></paper-input></td>
             </tr>
           </template>
         </tbody>
@@ -103,16 +103,6 @@
       static get is() { return "bestel-voorraad"; }
       static get properties() {
         return {
-          voorraad: {
-            type: Array,
-            value: [
-            { gerecht: "gerecht1", hoeveelheid: "200", minimumVoorraad: "250", aantal: "0" },
-            { gerecht: "gerecht2", hoeveelheid: "150", minimumVoorraad: "250", aantal: "0" },
-            { gerecht: "gerecht3", hoeveelheid: "120", minimumVoorraad: "250", aantal: "0" },
-            { gerecht: "gerecht4", hoeveelheid: "320", minimumVoorraad: "250", aantal: "0" },
-            { gerecht: "gerecht5", hoeveelheid: "60", minimumVoorraad: "250", aantal: "0" }
-            ]
-          }
         };
       }
     }
